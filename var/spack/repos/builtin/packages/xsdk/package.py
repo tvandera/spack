@@ -353,6 +353,5 @@ class Xsdk(BundlePackage, CudaPackage, ROCmPackage):
                     cuda_var=['cuda', '?magma'])
 
     xsdk_depends_on('slate@master', when='@develop +slate %gcc@6.0:', cuda_var='cuda')
-    # TODO: should this version have +cuda?
-    xsdk_depends_on('slate@2021.05.02 ~cuda', when='@0.7.0 ~cuda +slate %gcc@6.0:')
+    xsdk_depends_on('slate@2021.05.02', when='@0.7.0 +slate %gcc@6.0:', cuda_var='cuda')
     xsdk_depends_on('slate@2020.10.00', when='@0.6.0 +slate %gcc@6.0:', cuda_var='cuda')
