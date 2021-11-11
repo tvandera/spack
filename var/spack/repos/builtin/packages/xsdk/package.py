@@ -269,10 +269,11 @@ class Xsdk(BundlePackage, CudaPackage, ROCmPackage):
     xsdk_depends_on('omega-h@9.29.0', when='@0.5.0 +omega-h')
     xsdk_depends_on('omega-h@9.19.1', when='@0.4.0 +omega-h')
 
-    xsdk_depends_on('strumpack ~cuda', when='~cuda @0.6.0: +strumpack')
-    xsdk_depends_on('strumpack@master~slate~openmp', when='@develop +strumpack')
-    xsdk_depends_on('strumpack@6.1.0~slate~openmp', when='@0.7.0 +strumpack')
-    xsdk_depends_on('strumpack@5.0.0~slate~openmp', when='@0.6.0 +strumpack')
+    xsdk_depends_on('strumpack@master~openmp', when='@develop +strumpack',
+                    cuda_var='cuda')
+    xsdk_depends_on('strumpack@6.1.0~openmp', when='@0.7.0 +strumpack',
+                    cuda_var='cuda')
+    xsdk_depends_on('strumpack@5.0.0~slate~openmp~cuda', when='@0.6.0 +strumpack')
     xsdk_depends_on('strumpack@3.3.0~slate~openmp', when='@0.5.0 +strumpack')
     xsdk_depends_on('strumpack@3.1.1~slate~openmp', when='@0.4.0 +strumpack')
 
@@ -352,6 +353,6 @@ class Xsdk(BundlePackage, CudaPackage, ROCmPackage):
     xsdk_depends_on('heffte@2.0.0+fftw', when='@0.6.0 +heffte',
                     cuda_var=['cuda', '?magma'])
 
-    xsdk_depends_on('slate@master', when='@develop +slate %gcc@6.0:', cuda_var='cuda')
-    xsdk_depends_on('slate@2021.05.02', when='@0.7.0 +slate %gcc@6.0:', cuda_var='cuda')
-    xsdk_depends_on('slate@2020.10.00', when='@0.6.0 +slate %gcc@6.0:', cuda_var='cuda')
+    xsdk_depends_on('slate@master', when='@develop +slate', cuda_var='cuda')
+    xsdk_depends_on('slate@2021.05.02', when='@0.7.0 +slate', cuda_var='cuda')
+    xsdk_depends_on('slate@2020.10.00', when='@0.6.0 +slate', cuda_var='cuda')
