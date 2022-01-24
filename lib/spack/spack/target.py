@@ -160,3 +160,6 @@ class Target(object):
         return self.microarchitecture.optimization_flags(
             compiler.name, str(compiler_version)
         )
+
+    def is_64bit(self):
+        return '64' in self.microarchitecture

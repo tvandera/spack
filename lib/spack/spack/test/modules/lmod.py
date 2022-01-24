@@ -2,7 +2,6 @@
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
-import os
 import re
 import sys
 
@@ -44,7 +43,7 @@ def provider(request):
 @pytest.mark.usefixtures('config', 'mock_packages',)
 class TestLmod(object):
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_file_layout(
             self, compiler, provider, factory, module_configuration
     ):
@@ -82,7 +81,7 @@ class TestLmod(object):
         else:
             assert repetitions == 1
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_simple_case(self, modulefile_content, module_configuration):
         """Tests the generation of a simple TCL module file."""
 
@@ -94,7 +93,7 @@ class TestLmod(object):
         assert 'whatis([[Version : 3.0.4]])' in content
         assert 'family("mpi")' in content
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_autoload_direct(self, modulefile_content, module_configuration):
         """Tests the automatic loading of direct dependencies."""
 
@@ -103,7 +102,7 @@ class TestLmod(object):
 
         assert len([x for x in content if 'depends_on(' in x]) == 2
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_autoload_all(self, modulefile_content, module_configuration):
         """Tests the automatic loading of all dependencies."""
 
@@ -112,7 +111,7 @@ class TestLmod(object):
 
         assert len([x for x in content if 'depends_on(' in x]) == 5
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_alter_environment(self, modulefile_content, module_configuration):
         """Tests modifications to run-time environment."""
 
@@ -135,7 +134,7 @@ class TestLmod(object):
         assert len([x for x in content if 'setenv("FOO", "foo")' in x]) == 0
         assert len([x for x in content if 'unsetenv("BAR")' in x]) == 0
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_prepend_path_separator(self, modulefile_content,
                                     module_configuration):
         """Tests modifications to run-time environment."""
@@ -149,7 +148,7 @@ class TestLmod(object):
             elif re.match(r'[a-z]+_path\("SEMICOLON"', line):
                 assert line.endswith('"bar", ";")')
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_blacklist(self, modulefile_content, module_configuration):
         """Tests blacklisting the generation of selected modules."""
 
@@ -158,7 +157,7 @@ class TestLmod(object):
 
         assert len([x for x in content if 'depends_on(' in x]) == 1
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_no_hash(self, factory, module_configuration):
         """Makes sure that virtual providers (in the hierarchy) always
         include a hash. Make sure that the module file for the spec
@@ -309,7 +308,7 @@ class TestLmod(object):
         projection = writer.spec.format(writer.conf.projections['mpileaks'])
         assert projection in writer.layout.use_name
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_projections_all(self, factory, module_configuration):
         """Tests reading the correct naming scheme."""
 
@@ -346,7 +345,7 @@ class TestLmod(object):
         assert old_format == new_format
         assert old_format == settings['lmod']
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_modules_relative_to_view(
         self, tmpdir, modulefile_content, module_configuration, install_mockery,
         mock_fetch

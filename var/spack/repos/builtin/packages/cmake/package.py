@@ -258,7 +258,7 @@ class Cmake(Package):
     def bootstrap_args(self):
         spec = self.spec
         args = []
-        if not os.name == 'nt':
+        if not sys.platform == 'win32':
             args.extend(
                 ['--prefix={0}'.format(self.prefix),
                  '--parallel={0}'.format(make_jobs)]
@@ -344,7 +344,7 @@ class Cmake(Package):
 
     def bootstrap(self, spec, prefix):
         bootstrap_args = self.bootstrap_args()
-        if os.name == 'nt':
+        if sys.platform == 'win32':
             self.winbootcmake(spec)
             bootstrap = self.cmake_bootstrap()
             bootstrap_args.extend(['.'])

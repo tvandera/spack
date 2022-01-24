@@ -22,8 +22,7 @@ from llnl.util.symlink import symlink
 
 from spack import *
 
-host = spack.platforms.host()
-is_windows = str(host) == 'windows'
+is_windows = str(spack.platforms.host()) == 'windows'
 
 
 class Perl(Package):  # Perl doesn't use Autotools, it should subclass Package
@@ -200,7 +199,7 @@ class Perl(Package):  # Perl doesn't use Autotools, it should subclass Package
             args.append("ALL_STATIC=%s" % "define")
         if self.spec.satisfies('~threads'):
             args.extend(["USE_MULTI=undef", "USE_ITHREADS=undef", "USE_IMP_SYS=undef"])
-        if not host.is_64bit():
+        if not self.spec.target.is_64bit():
             args.append("WIN64=undef")
         return args
 
@@ -286,7 +285,7 @@ class Perl(Package):  # Perl doesn't use Autotools, it should subclass Package
         if not is_windows:
             return
         win_install_path = os.path.join(self.prefix.bin, "MSWin32")
-        if host.is_64bit():
+        if self.spec.target.is_64bit():
             win_install_path += "-x64"
         else:
             win_install_path += "-x86"

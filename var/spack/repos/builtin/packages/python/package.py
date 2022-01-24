@@ -25,7 +25,7 @@ from spack.util.prefix import Prefix
 
 arch_map = {"AMD64": "x64", "x86": "Win32",
             "IA64": "Win32", "EM64T": "Win32"}
-is_windows = os.name == 'nt'
+is_windows = sys.platform == 'win32'
 
 
 class Python(Package):

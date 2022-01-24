@@ -1541,14 +1541,14 @@ Required:
 Optional:
 * Intel Fortran (needed for some packages)
 
-Note:
-Currently MSVC is the only compiler tested for C/C++ projects. Intel OneAPI provides Fortran support.
+.. note::
+  Currently MSVC is the only compiler tested for C/C++ projects. Intel OneAPI provides Fortran support.
 
 """""""""""""""""""""""
 Microsoft Visual Studio
 """""""""""""""""""""""
 
-Microsoft Visual Studio provides the Windows C/C++ compiler that is currently supported by Spack.
+Microsoft Visual Studio provides the only Windows C/C++ compiler that is currently supported by Spack.
 
 We require several specific components to be included in the Visual Studio installation.
 One is the C/C++ toolset, which can be selected as "Desktop development with C++" or "C++ build tools,"
@@ -1617,11 +1617,12 @@ with
 
   git checkout -b features/windows-support --track <spack_upstream>/features/windows-support
 
-Note:
-If you chose to install spack into a directory on Windows that is set up to require Administrative
-Privleges (either by default like `C:\Program Files`, or by administrative settings), or have administrative
-restrictions on a directory spack install files to such as `C:\Users\`, Spack will require elevated privleges
-to run.
+.. note::
+
+  If you chose to install spack into a directory on Windows that is set up to require Administrative
+  Privleges (either by default like `C:\Program Files`, or by administrative settings), or have administrative
+  restrictions on a directory spack install files to such as `C:\Users\`, Spack will require elevated privleges
+  to run.
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Step 3: Run and configure Spack
@@ -1695,6 +1696,11 @@ obtain it by running the Visual Studio Installer and following the instructions
 at the start of this section. Also note that .yaml files use spaces for indentation
 and not tabs, so ensure that this is the case when editing one directly.
 
+
+.. note:: Cygwin
+   The use of Cygwin is not officially supported by Spack and is not tested.
+   However Spack will not throw an error, so use if choosing to use Spack
+   with Cygwin, know that no functionality is garunteed.
 ^^^^^^^^^^^^^^^^^
 Step 4: Use Spack
 ^^^^^^^^^^^^^^^^^
@@ -1717,20 +1723,22 @@ dependencies or incompatible build tools like autoconf. Here are several
 packages known to work on Windows:
 
 * abseil-cpp
-* cpuinfo
-* glm
-* netlib-lapack (requires Intel Fortran)
-* openssl
-* zlib
-* perl
-* ruby
-* python
-* cmake
-* ninja
-* nasm
 * clingo
+* cpuinfo
+* cmake
+* glm
+* nasm
+* netlib-lapack (requires Intel Fortran)
+* ninja
+* openssl
+* perl
+* python
+* ruby
+* wrf
+* zlib
 
-Note: this is not a comprehensive list
+.. note::
+   This is by no means a comprehensive list
 
 ^^^^^^^^^^^^^^
 For developers

@@ -592,7 +592,7 @@ def configuration_dir(tmpdir_factory, linux_os):
     tmpdir.ensure('user', dir=True)
 
     # Slightly modify config.yaml and compilers.yaml
-    if os.name == 'nt':
+    if sys.platform == 'win32':
         solver = 'original'
     else:
         solver = os.environ.get('SPACK_TEST_SOLVER', 'clingo')

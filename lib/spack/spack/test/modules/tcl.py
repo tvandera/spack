@@ -3,7 +3,6 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-import os
 import sys
 
 import pytest
@@ -100,7 +99,7 @@ class TestTcl(object):
 
         assert len([x for x in content if 'prereq' in x]) == 5
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     def test_alter_environment(self, modulefile_content, module_configuration):
         """Tests modifications to run-time environment."""
 
@@ -371,7 +370,7 @@ class TestTcl(object):
         short_description = 'module-whatis "This package updates the context for TCL modulefiles."'  # NOQA: ignore=E501
         assert short_description in content
 
-    @pytest.mark.skipif(os.name == 'nt', reason="Skip test on Windows")
+    @pytest.mark.skipif(sys.platform == 'win32', reason="Skip test on Windows")
     @pytest.mark.regression('4400')
     @pytest.mark.db
     def test_blacklist_implicits(
