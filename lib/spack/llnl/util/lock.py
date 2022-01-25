@@ -4,9 +4,9 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import errno
-import fcntl
 import os
 import socket
+import sys
 import time
 from datetime import datetime
 from typing import Dict, Tuple  # novm
@@ -14,6 +14,9 @@ from typing import Dict, Tuple  # novm
 import llnl.util.tty as tty
 
 import spack.util.string
+
+if sys.platform != 'win32':
+    import fcntl
 
 __all__ = [
     'Lock',
