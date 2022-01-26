@@ -1357,3 +1357,11 @@ class TestConcretize(object):
         s = spack.spec.Spec(spec_str).concretized(reuse=True)
         assert s.package.installed is expect_installed
         assert s.satisfies(spec_str, strict=True)
+
+    def test_do_not_invent_new_concrete_versions_unless_necessary(self):
+        # ensure we select a known satisfying version rather than creating
+        # a new '2.7' version.
+        assert ver("2.7.11") == spack.spec.Spec("python@2.7").concretized().version
+
+        # Here there is no known satisfying version - use the one on the spec.
+        assert ver("2.7.21") == spack.spec.Spec("python@2.7.21").concretized().version
