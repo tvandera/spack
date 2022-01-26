@@ -18,6 +18,7 @@ import spack.util.string
 if sys.platform != 'win32':
     import fcntl
 
+
 __all__ = [
     'Lock',
     'LockDowngradeError',

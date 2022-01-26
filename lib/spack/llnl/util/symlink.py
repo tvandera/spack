@@ -9,11 +9,11 @@ import tempfile
 from os.path import exists, join
 from sys import platform as _platform
 
+from llnl.util import lang
+
 from spack.util.executable import Executable
 
 is_windows = _platform == 'win32'
-
-__win32_can_symlink__ = None
 
 
 def symlink(real_path, link_path):
@@ -64,12 +64,8 @@ def _win32_junction(path, link):
 
     Executable(command)(*default_args)
 
-
+@lang.memoized
 def _win32_can_symlink():
-    global __win32_can_symlink__
-    if __win32_can_symlink__ is not None:
-        return __win32_can_symlink__
-
     tempdir = tempfile.mkdtemp()
 
     dpath = join(tempdir, 'dpath')
@@ -96,9 +92,7 @@ def _win32_can_symlink():
     # Cleanup the test directory
     shutil.rmtree(tempdir)
 
-    __win32_can_symlink__ = can_symlink_directories and can_symlink_files
-
-    return __win32_can_symlink__
+    return can_symlink_directories and can_symlink_files
 
 
 def _win32_is_junction(path):
