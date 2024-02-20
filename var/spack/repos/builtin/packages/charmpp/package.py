@@ -64,7 +64,7 @@ class Charmpp(Package):
         "build-target",
         default="LIBS",
         # AMPI also builds charm++, LIBS also builds AMPI and charm++
-        values=("charm++", "AMPI", "LIBS", "ChaNGa"),
+        values=("charm++", "AMPI", "LIBS", "ChaNGa", "charm4py"),
         description="Specify the target to build",
     )
 
@@ -175,6 +175,9 @@ class Charmpp(Package):
             ("darwin", "x86_64", "mpi"): "mpi-darwin-x86_64",
             ("darwin", "x86_64", "multicore"): "multicore-darwin-x86_64",
             ("darwin", "x86_64", "netlrts"): "netlrts-darwin-x86_64",
+            ("darwin", "arm", "mpi"): "mpi-darwin-arm8",
+            ("darwin", "arm", "multicore"): "multicore-darwin-arm8",
+            ("darwin", "arm", "netlrts"): "netlrts-darwin-arm8",
             ("linux", "x86_64", "mpi"): "mpi-linux-x86_64",
             ("linux", "x86_64", "multicore"): "multicore-linux-x86_64",
             ("linux", "x86_64", "netlrts"): "netlrts-linux-x86_64",
